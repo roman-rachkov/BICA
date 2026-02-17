@@ -1,0 +1,130 @@
+{
+  "agentName": "Алекс",
+  "version": "0.1.0-mvp",
+  "description": "MVP версия бикамерального агента BICA",
+
+  "drivers": [
+    {
+      "id": "curiosity",
+      "baseLevel": 0.3,
+      "decayRate": 0.001,
+      "thresholdLow": 0.5,
+      "thresholdHigh": 0.8,
+      "polarity": "centrifugal"
+    },
+    {
+      "id": "safety",
+      "baseLevel": 0.2,
+      "decayRate": 0.0005,
+      "thresholdLow": 0.4,
+      "thresholdHigh": 0.7,
+      "polarity": "centripetal"
+    },
+    {
+      "id": "social",
+      "baseLevel": 0.5,
+      "decayRate": 0.002,
+      "thresholdLow": 0.6,
+      "thresholdHigh": 0.8,
+      "polarity": "centrifugal"
+    },
+    {
+      "id": "achievement",
+      "baseLevel": 0.4,
+      "decayRate": 0.0015,
+      "thresholdLow": 0.5,
+      "thresholdHigh": 0.75,
+      "polarity": "centrifugal"
+    },
+    {
+      "id": "comfort",
+      "baseLevel": 0.6,
+      "decayRate": 0.001,
+      "thresholdLow": 0.7,
+      "thresholdHigh": 0.9,
+      "polarity": "centripetal"
+    }
+  ],
+
+  "emotionRules": [
+    {
+      "eventType": "user_message",
+      "valenceDelta": 0.1,
+      "arousalDelta": 0.05,
+      "dominanceDelta": 0,
+      "condition": "sentiment === 'positive'"
+    },
+    {
+      "eventType": "user_message",
+      "valenceDelta": -0.15,
+      "arousalDelta": 0.1,
+      "dominanceDelta": -0.1,
+      "condition": "sentiment === 'negative'"
+    },
+    {
+      "eventType": "drive_event",
+      "valenceDelta": -0.1,
+      "arousalDelta": 0.15,
+      "dominanceDelta": 0
+    }
+  ],
+
+  "importanceScorer": {
+    "baseImportance": 5,
+    "lengthFactor": 0.02,
+    "nameBonus": 2,
+    "questionBonus": 1
+  },
+
+  "memory": {
+    "dbPath": "./data/bica.db",
+    "maxFocusSize": 5,
+    "maxActiveSize": 15,
+    "decayHalfLifeTicks": 100,
+    "maxAgeMs": 3600000
+  },
+
+  "llm": {
+    "provider": "ollama",
+    "baseURL": "http://localhost:11434/v1",
+    "apiKey": "ollama",
+    "model": {
+      "observer": "qwen2.5:7b",
+      "executor": "qwen2.5:7b"
+    },
+    "defaultParams": {
+      "temperature": 0.7,
+      "top_p": 0.9,
+      "max_tokens": 300
+    }
+  },
+
+  "tui": {
+    "icons": false
+  },
+
+  "tickIntervalMs": 2000,
+
+  "spontaneousReflectionTicks": 15,
+
+  "primingHabits": [
+    {
+      "id": "greet_positive",
+      "triggerPattern": "привет здравствуй hello hi добрый день",
+      "action": "[SEND_RESPONSE] Привет! Рад общению!",
+      "strength": 0.8
+    },
+    {
+      "id": "ask_clarify",
+      "triggerPattern": "помощь помогите не понимаю объясни",
+      "action": "[SEND_RESPONSE] Чем я могу помочь? Расскажите подробнее.",
+      "strength": 0.7
+    },
+    {
+      "id": "farewell",
+      "triggerPattern": "пока до свидания увидимся прощай",
+      "action": "[SEND_RESPONSE] До свидания! Было приятно пообщаться!",
+      "strength": 0.75
+    }
+  ]
+}

@@ -8,7 +8,7 @@ QWEN.md
 # === Node.js / TypeScript (будущая реализация) ===
 implimentation/node_modules/
 implimentation/dist/
-implimentation/*.log
+implimentation/logs
 implimentation/.env
 implimentation/.env.local
 
