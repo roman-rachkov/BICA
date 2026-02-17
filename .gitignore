@@ -1,0 +1,29 @@
+# === Qwen Code (локальные файлы) ===
+QWEN.md
+.qwen/
+
+# === Локальная песочница ===
+.local/
+
+# === Node.js / TypeScript (будущая реализация) ===
+implimentation/node_modules/
+implimentation/dist/
+implimentation/*.log
+implimentation/.env
+implimentation/.env.local
+
+# === Базы данных (тестовые) ===
+*.db
+*.sqlite
+*.sqlite3
+
+# === Временные файлы ===
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+
+# === IDE ===
+.vscode/
+.idea/
+*.iml
